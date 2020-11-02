@@ -47,8 +47,8 @@ INSTALLED_APPS = [
 AUTH_USER_MODEL = 'equideo.User'
 
 AUTHENTICATION_BACKENDS = (
-    'equideo.backends.MyEmailBackend', # our custom authentication backend
-    'django.contrib.auth.backends.ModelBackend' # fallback to default authentication backend if first fails 
+    'equideo.backends.NewBackend', # our custom authentication backend
+    
     )
 
 
