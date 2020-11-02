@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser
 from .managers import UserManager
-from django.core.validators import RegexValidator
+from django.core.validators import RegexValidator, MinValueValidator, MaxValueValidator
 
 # Create your models here.
 class User(AbstractBaseUser):
@@ -43,3 +43,15 @@ class User(AbstractBaseUser):
         "Is the user a member of staff?"
         # Simplest possible answer: All admins are staff
         return self.is_admin
+
+
+class Lesson(models.Model):
+
+    title = models.CharField(max_length=30, blank=True, null=True)
+    start_time = models.DateTimeField()
+    end_time =  models.DateTimeField()
+    max_rider = models.IntegerField(validators=[MinValueValidator(1)])
+    gallop_level = models.IntegerField(validators=[MinValueValidator(1), MaxValueValidator(7)])
+    reccurency = models.CharField(max_length=50, null=True, blank=True)
+    available_during_holidays = models.BooleanField(default=False)
+    

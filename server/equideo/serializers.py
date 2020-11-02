@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from django.contrib.auth.hashers import make_password
 from django.contrib.auth import get_user_model
+from equideo.models  import Lesson
 User = get_user_model()
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
@@ -19,3 +20,10 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
     def create(self, validated_data):
         validated_data['password'] = make_password(validated_data.get('password'))
         return super(UserSerializer, self).create(validated_data)
+
+class LessonSerializer(serializers.HyperlinkedModelSerializer):
+    
+    class Meta:
+        model = Lesson
+        fields = ['title', 'start_time', 'end_time', 'max_rider', 'gallop_level', 'reccurency', 'available_during_holidays']
+
