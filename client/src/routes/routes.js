@@ -70,17 +70,9 @@ const routes = [
     ]
   },
   {
-    path: '/',
-    redirect: 'profile',
-    component: Profile,
-    children: [
-      {
-        path: '/myprofile',
-        name: 'MyProfile',
-        component: () => import(/* webpackChunkName: "demo" */ '../views1/MyProfile.vue')
-      },
-      { path: '*', component: NotFound }
-    ]
+    path: '/myprofile',
+    redirect: 'MyProfile',
+    component: () => import(/* webpackChunkName: "demo" */ '../views1/MyProfile.vue')
   }
 ];
 
