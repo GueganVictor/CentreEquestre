@@ -1,89 +1,62 @@
-import { createWebHistory, createRouter } from "vue-router";
-// Views
-import Home from "@/views/Home.vue";
-import Login from "@/views/Login.vue";
-import Register from "@/views/Register.vue";
-import PasswordRecovery from "@/views/PasswordRecovery.vue";
-import DashboardRider from "@/views/DashboardRider.vue";
-import DashboardAdmin from "@/views/DashboardAdmin.vue";
-import DashboardSuperUser from "@/views/DashboardSuperUser.vue";
-import DashboardInstructor from "@/views/DashboardInstructor.vue";
-import MyProfile from "@/views/MyProfile.vue";
-// Components
-import HomeRider from "@/components/HomeRider.vue"
-import LessonsAvailable from "@/components/LessonsAvailable.vue"
-import HomeAdmin from "@/components/HomeAdmin.vue"
-import Horses from "@/components/Horses.vue"
-import Users from "@/components/Users.vue"
-import HomeSuperUser from "@/components/HomeSuperUser.vue"
-import Admins from "@/components/Admins.vue"
-import HomeInstructor from "@/components/HomeInstructor.vue"
-import Horse2Rider from "@/components/Horse2Rider.vue"
+import DashboardLayout from '@/views/Layout/DashboardLayout.vue';
+import AuthLayout from '@/views/Pages/AuthLayout.vue';
+
+import NotFound from '@/views/NotFoundPage.vue';
 
 const routes = [
   {
-    path: "/",
-    name: "Home",
-    component: Home,
-  },
-  {
-    path: "/login",
-    name: "Login",
-    component: Login,
-  },
-  {
-    path: "/register",
-    name: "Register",
-    component: Register,
-  },
-  {
-    path: "/password_recovry",
-    name: "Password Recovery",
-    component: PasswordRecovery,
-  },
-  {
-    path: "/dashboardRider",
-    component: DashboardRider,
+    path: '/',
+    redirect: 'dashboard',
+    component: DashboardLayout,
     children: [
-      { path: "", name: "DashboardRider", component: HomeRider },
-      { path: "lessons", name: "LessonsAvailable", component: LessonsAvailable },
+      {
+        path: '/dashboard',
+        name: 'dashboard',
+        // route level code-splitting
+        // this generates a separate chunk (about.[hash].js) for this route
+        // which is lazy-loaded when the route is visited.
+        component: () => import(/* webpackChunkName: "demo" */ '../views/Dashboard.vue')
+      },
+      {
+        path: '/icons',
+        name: 'icons',
+        component: () => import(/* webpackChunkName: "demo" */ '../views/Icons.vue')
+      },
+      {
+        path: '/profile',
+        name: 'profile',
+        component: () => import(/* webpackChunkName: "demo" */ '../views/Pages/UserProfile.vue')
+      },
+      {
+        path: '/maps',
+        name: 'maps',
+        component: () => import(/* webpackChunkName: "demo" */ '../views/GoogleMaps.vue')
+      },
+      {
+        path: '/tables',
+        name: 'tables',
+        component: () => import(/* webpackChunkName: "demo" */ '../views/RegularTables.vue')
+      }
     ]
   },
   {
-    path: "/dashboardAdmin",
-    component: DashboardAdmin,
+    path: '/',
+    redirect: 'login',
+    component: AuthLayout,
     children: [
-      { path: "", name: "DashboardAdmin", component: HomeAdmin },
-      { path: "horses", name: "Horses", component: Horses },
-      { path: "users", name: "users", component: Users },
+      {
+        path: '/login',
+        name: 'login',
+        component: () => import(/* webpackChunkName: "demo" */ '../views/Pages/Login.vue')
+      },
+      {
+        path: '/register',
+        name: 'register',
+        component: () => import(/* webpackChunkName: "demo" */ '../views/Pages/Register.vue')
+      },
+      { path: '*', component: NotFound }
     ]
-  },
-  {
-    path: "/dashboardSuperUser",
-    component: DashboardSuperUser,
-    children: [
-      { path: "", name: "DashboardSuperUser", component: HomeSuperUser },
-      { path: "admins", name: "Admins", component: Admins },
-    ]
-  },
-  {
-    path: "/dashboardInstructor",
-    component: DashboardInstructor,
-    children: [
-      { path: "", name: "DashboardInstructor", component: HomeInstructor },
-      { path: "horse2Rider", name: "Horse2Rider", component: Horse2Rider },
-    ]
-  },
-  {
-    path: "/my_profile",
-    name: "MyProfile",
-    component: MyProfile,
   }
 ];
 
-const router = createRouter({
-  history: createWebHistory(),
-  routes,
-});
-
-export default router;
+export default routes;
