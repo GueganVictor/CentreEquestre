@@ -4,16 +4,13 @@ from django.conf import settings
 from django.contrib.auth.hashers import check_password
 from rest_framework import exceptions
 import re
-import logging
 
-logger = logging.getLogger("logger")
 
 class NewBackend(BaseBackend):
     """
     
     """
     def authenticate(self, request, username, password):
-        logger.error("aled")
         my_user_model = get_user_model()
         try:
             if  re.match(r"^(?:(?:\+|00)33|0)\s*[1-9](?:[\s.-]*\d{2}){4}$", username):
@@ -34,7 +31,6 @@ class NewBackend(BaseBackend):
             return None # return None in case of other exceptions
 
     def get_user(self, user_id):
-        logger.error("error")
         my_user_model = get_user_model()
         try:
             return my_user_model.objects.get(pk=user_id)
