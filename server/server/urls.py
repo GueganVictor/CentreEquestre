@@ -32,6 +32,7 @@ urlpatterns = [
     path('', include(router.urls)),
     path('auth/', include('rest_auth.urls')),
     path('auth/signup/', include('rest_auth.registration.urls')),
-    path('auth/refresh-token/', refresh_jwt_token),
+    path('auth/refresh_token/', refresh_jwt_token),
+    path('auth/get_token/', obtain_jwt_token),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 ]

@@ -1,62 +1,36 @@
-import DashboardLayout from '@/views/Layout/DashboardLayout.vue';
-import AuthLayout from '@/views/Pages/AuthLayout.vue';
+import Vue from 'vue'
+import VueRouter from 'vue-router'
+import DashboardLayout from "../views/DashboardLayout.vue";
 
-import NotFound from '@/views/NotFoundPage.vue';
+import Users from '../components/dashboard/Users.vue'
+import Home from '../components/dashboard/Home.vue'
+Vue.use(VueRouter)
 
 const routes = [
   {
-    path: '/',
-    redirect: 'dashboard',
+    path: "/dashboard/",
+
     component: DashboardLayout,
     children: [
-      {
-        path: '/dashboard',
-        name: 'dashboard',
-        // route level code-splitting
-        // this generates a separate chunk (about.[hash].js) for this route
-        // which is lazy-loaded when the route is visited.
-        component: () => import(/* webpackChunkName: "demo" */ '../views/Dashboard.vue')
-      },
-      {
-        path: '/icons',
-        name: 'icons',
-        component: () => import(/* webpackChunkName: "demo" */ '../views/Icons.vue')
-      },
-      {
-        path: '/profile',
-        name: 'profile',
-        component: () => import(/* webpackChunkName: "demo" */ '../views/Pages/UserProfile.vue')
-      },
-      {
-        path: '/maps',
-        name: 'maps',
-        component: () => import(/* webpackChunkName: "demo" */ '../views/GoogleMaps.vue')
-      },
-      {
-        path: '/tables',
-        name: 'tables',
-        component: () => import(/* webpackChunkName: "demo" */ '../views/RegularTables.vue')
-      }
+      { path: "", name: "dashboard", component: Home },
+      { path: "users", name: "users", component: Users },
     ]
   },
   {
-    path: '/',
-    redirect: 'login',
-    component: AuthLayout,
-    children: [
-      {
-        path: '/login',
-        name: 'login',
-        component: () => import(/* webpackChunkName: "demo" */ '../views/Pages/Login.vue')
-      },
-      {
-        path: '/register',
-        name: 'register',
-        component: () => import(/* webpackChunkName: "demo" */ '../views/Pages/Register.vue')
-      },
-      { path: '*', component: NotFound }
-    ]
+    path: '/about',
+    name: 'About',
+    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
+  },
+  {
+    path: "/",
+    name: "homepage",
+    component: () => import(/* webpackChunkName: "about" */ '../views/Home.vue')
   }
-];
+]
 
-export default routes;
+const router = new VueRouter({
+  mode: "history",
+  routes
+})
+
+export default router
