@@ -24,6 +24,7 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
                   'first_name', 'last_name', 'phone_number', 'licence_number', 'role', 'is_admin', 'is_superuser']
 
     def create(self, validated_data):
+        validated_data['password'] = make_password(validated_data['password'], None, 'pbkdf2_sha256')
         return super(UserSerializer, self).create(validated_data)
 
 

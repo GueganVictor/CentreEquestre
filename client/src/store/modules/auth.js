@@ -178,7 +178,6 @@ const mutations = {
     state.users = users
   },
   setToken(state, token) {
-    console.log("hello" + token);
     state.token = token
   },
   setHorses(state, horses) {
