@@ -63,7 +63,6 @@ Afin de pouvoir vous connecter en superuser, vous pouvez utiliser le compte suiv
 username : **admin**
 password : **admin**
 
-Afin de pouvoir vous connecter en rider, vous devez utiliser le compte suivant :
+Afin de pouvoir vous connecter en rider, admin, moniteur, vous devez d'abord créer un compte avec le superuser
 
-username : **working_rider**
-password : **password123?**
+
