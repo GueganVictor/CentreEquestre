@@ -30,6 +30,7 @@
           <select v-model="form.role" name="role" id="role">
             <option default value="admin">admin</option>
             <option value="instructor">instructor</option>
+            <option value="instructor">rider</option>
           </select>
         </div>
 
@@ -60,7 +61,7 @@
       </v-card-title>
       <v-data-table
         :headers="headers"
-        :items="Users.filter(user => user.role == 'admin' || user.role == 'instructor')"
+        :items="Users.filter(user => user.role != 'superuser')"
         :search="search"
       >
       <template v-slot:item.actions="{ item }">

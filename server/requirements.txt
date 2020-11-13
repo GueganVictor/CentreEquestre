@@ -1,3 +1,0 @@
-pip install djangorestframework-jwt
-pip install djangorestframework
-pip install django-rest-auth django-allauth
