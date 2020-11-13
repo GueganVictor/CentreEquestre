@@ -19,10 +19,10 @@ class NewBackend(BaseBackend):
                 user = my_user_model.objects.get(email=username)
             else :
                 user = my_user_model.objects.get(username=username)
-                
 
-            
-            if user.check_password(password):
+           
+                            
+            if  user.check_password(password):
                 return user # return user on valid credentials
         except my_user_model.DoesNotExist:
             raise exceptions.AuthenticationFailed('No such user')
@@ -39,16 +39,22 @@ class NewBackend(BaseBackend):
 
 from allauth.account.adapter import DefaultAccountAdapter
 from allauth.account.utils import user_field
-from django.contrib.auth.hashers import make_password
+import logging
+
 
 class UserAdapter(DefaultAccountAdapter):
     def save_user(self, request, user, form, commit=True):
         data = form.cleaned_data
+        
+        logger = logging.getLogger()
+        logger.error('Hello logs!' + str(data))
+
         user_field(user, 'first_name',data.get('first_name'))
         user_field(user, 'last_name',data.get('last_name'))
         user_field(user, 'phone_number',data.get('phone_number'))
-        user_field(user, 'licence_number',data.get('licence_number'))
-        user_field(user, 'licence_number', make_password(data.get('licence_number')))
+        user_field(user, 'role',data.get('role'))
+        if data.get('licence_number') is not None:
+            user_field(user, 'licence_number',data.get('licence_number'))
         return super().save_user(request, user, form, commit=commit)
 
 from rest_framework.authentication import SessionAuthentication 
@@ -57,7 +63,3 @@ class CsrfExemptSessionAuthentication(SessionAuthentication):
 
     def enforce_csrf(self, request):
         return  # To not perform the csrf check previously happening
-
-         
-
-         # accounts.utils

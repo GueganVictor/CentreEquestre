@@ -30,10 +30,15 @@
               <label for="password">Password:</label>
               <input type="password" name="password" v-model="form.password">
             </div>
+            <div>
+              <label for="password2">Password Verification:</label>
+              <input type="password" name="password2" v-model="password2">
+            </div>
             <button type="submit"> Submit</button>
           </form>
       </div>
-      <p v-if="showError" id="error">Username already exists</p>
+      <p v-if="showError" id="error">Something went wrong..</p>
+      <p v-if="!matchingPassword" id="error">Password aren't matching..</p>
   </div>
 </template>
 
@@ -54,15 +59,21 @@ export default {
         "licence_number": "",
         "role": 'rider'
       },
-      showError: false
+      "password2": "",
+      showError: false,
+      matchingPassword: true
     };
   },
   methods: {
     ...mapActions(["Register"]),
     async submit() {
+      if (this.form.password != this.password2) {
+        this.matchingPassword = false;
+        return;
+      }
       try {
         await this.Register(this.form);
-        this.$router.push("/posts");
+        this.$router.push("/");
         this.showError = false
       } catch (error) {
         this.showError = true
