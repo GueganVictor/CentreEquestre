@@ -15,6 +15,7 @@ const getters = {
   StateUser: (state) => state.user,
   StateHorses: (state) => state.horses,
   StateLessons: (state) => state.lessons,
+  StateHorseRiders: (state) => state.horseriders,
   StateToken: (state) => state.token,
 };
 
@@ -22,23 +23,15 @@ const actions = {
   async Register({ dispatch }, form) {
     await axios.post('auth/signup/', form)
     let UserForm = new FormData()
-    UserForm.append('username', form.username)
-    UserForm.append("email", form.email)
+    UserForm.append('username', form.email)
     UserForm.append("password", form.password)
-    UserForm.append("first_name", form.first_name)
-    UserForm.append("last_name", form.last_name)
-    UserForm.append("phone_number", form.phone_number)
-    UserForm.append("licence_number", form.licence_number)
     await dispatch('LogIn', UserForm)
   },
 
   async LogIn({ dispatch }, user) {
     let response = await axios.post("auth/get_token/", user);
-
-    //await commit("setToken", response.data.token)
-
     getters.StateToken.token = response.data.token;
-    await dispatch("GetUser", response.data.token);
+    await dispatch("GetUser", user.get("username"));
   },
 
   async CreateAdmin({ dispatch }, user) {
@@ -66,6 +59,15 @@ const actions = {
       }
     });
     return await dispatch("GetLessons");
+  },
+
+  async CreateHorseRider({ dispatch }, lesson) {
+    await axios.post("horseriders/", lesson, {
+      headers: {
+        'Authorization': 'JWT ' + getters.StateToken.token,
+      }
+    });
+    return await dispatch("GetHorseRiders");
   },
 
   async DeleteUser({ dispatch }, id) {
@@ -123,23 +125,31 @@ const actions = {
     commit("setLessons", response.data);
   },
 
-  async GetUser({ commit }, token) {
-    console.log(token);
-    let response = await axios.get("users/" + 1 + "/", {
+  async GetHorseRiders({ commit }) {
+    let response = await axios.get("horseriders/", {
       headers: {
-        'Authorization': 'JWT ' + token,
+        'Authorization': 'JWT ' + getters.StateToken.token,
       }
     });
-    commit("setUser", response.data);
+    commit("setHorseRiders", response.data);
   },
 
-  async UpdateUser({ commit }, user) {
-    let response = await axios.patch("users/" + user.id + "/", user, {
+  async GetUser({ commit }, username) {
+    let response = await axios.get("get_user/" + username + "/", {
       headers: {
         'Authorization': 'JWT ' + getters.StateToken.token,
       }
     });
     commit("setUser", response.data);
+  },
+
+  async UpdateUser({ dispatch }, user) {
+    await axios.patch("users/" + user.get("id") + "/", user, {
+      headers: {
+        'Authorization': 'JWT ' + getters.StateToken.token,
+      }
+    });
+    await dispatch("GetUsers");
   },
 
   async LogOut({ commit }) {
@@ -176,6 +186,9 @@ const mutations = {
   },
   setLessons(state, lessons) {
     state.lessons = lessons
+  },
+  setHorseRiders(state, horseriders) {
+    state.horseriders = horseriders
   },
   logout(state, user, users) {
     state.user = user;

@@ -62,7 +62,13 @@
         :headers="headers"
         :items="Users.filter(user => user.role == 'admin' || user.role == 'instructor')"
         :search="search"
-      ></v-data-table>
+      >
+      <template v-slot:item.actions="{ item }">
+          <!-- <v-icon small class="mr-2" @click="editItem(item)">
+            mdi-pencil
+          </v-icon> -->
+          <v-icon small @click="deleteItem(item)"> mdi-delete </v-icon>
+        </template></v-data-table>
     </v-card>
   </div>
 </template>
@@ -85,6 +91,7 @@ export default {
         { text: "last_name", value: "last_name" },
         { text: "phone_number", value: "phone_number" },
         { text: "role", value: "role" },
+        { text: "Actions", value: "actions", sortable: false },
       ],
       form: {
         email: "",
@@ -104,7 +111,7 @@ export default {
     ...mapGetters({ Users: "StateUsers", User: "StateUser" }),
   },
   methods: {
-    ...mapActions(["CreateAdmin", "GetUsers"]),
+    ...mapActions(["CreateAdmin", "GetUsers", "DeleteUser"]),
     async submit() {
       const Admin = new FormData();
       Admin.append("email", this.form.email);
@@ -118,6 +125,10 @@ export default {
       } catch (error) {
         throw "Sorry you can't make a user now!";
       }
+    },
+    deleteItem(item) {
+      this.DeleteUser(item.id)
+      return null;
     },
   },
 };

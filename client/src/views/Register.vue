@@ -52,6 +52,7 @@ export default {
         "last_name": "",
         "phone_number": "",
         "licence_number": "",
+        "role": 'rider'
       },
       showError: false
     };

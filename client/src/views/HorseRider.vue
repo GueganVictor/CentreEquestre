@@ -3,17 +3,19 @@
     <div v-if="User">
       <p>Hi {{ User.username }}</p>
     </div>
-    <div class="users" v-if="Lessons">
+    <div class="users" v-if="HorseRiders">
       <ul>
-        <li v-for="lesson in Lessons" :key="lesson.title">
+        <li v-for="horserider in HorseRiders.filter(horserider => horserider.rider.substr(horserider.rider.length - 2) == User.id+'/')" :key="horserider.id">
           <div id="user-div">
-            <p>{{ lesson.title }}</p>
-            <p>{{ lesson.end_time }}</p>
+            
+            <p>{{ horserider.id }}</p>
+            <p>{{ horserider.rider }}</p>
+            <p>{{ horserider.lesson }}</p>
           </div>
         </li>
       </ul>
     </div>
-    <div v-else>Oh no!!! We have no lessons</div>
+    <div v-else>Oh no!!! We have no HorseRiders</div>
   </div>
 </template>
 
@@ -40,13 +42,13 @@ export default {
   },
   created: function () {
     // a function to call getusers action
-    this.GetHorses();
+    this.GetHorseRiders();
   },
   computed: {
-    ...mapGetters({ Horses: "StateHorses", User: "StateUser" }),
+    ...mapGetters({ HorseRiders: "StateHorseRiders", User: "StateUser" }),
   },
   methods: {
-    ...mapActions(["CreateHorse", "GetHorses"]),
+    ...mapActions(["CreateHorseRider", "GetHorseRiders"]),
     async submit() {
       const Horse = new FormData();
       Horse.append("name", this.form.name);
@@ -57,7 +59,7 @@ export default {
       Horse.append("weight", this.form.weight);
       Horse.append("height", this.form.height);
       try {
-        await this.CreateHorse(Horse);
+        await this.CreateHorseRiders(Horse);
       } catch (error) {
         throw "Sorry you can't make a user now!";
       }
