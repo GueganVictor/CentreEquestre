@@ -1,11 +1,11 @@
 from rest_framework import serializers
 from django.contrib.auth.hashers import make_password
-from django.contrib.auth import get_user_model
 from equideo.models import Lesson, Horse, HorseRiders
 from allauth.account import app_settings as allauth_settings
 from allauth.utils import email_address_exists
 from allauth.account.adapter import get_adapter
 from allauth.account.utils import setup_user_email
+from django.contrib.auth import get_user_model
 User = get_user_model()
 
 
@@ -21,7 +21,11 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = User
         fields = ['url', 'username', 'email', 'password',
+<<<<<<< HEAD
                   'first_name', 'last_name', 'phone_number', 'licence_number', 'is_superuser', 'is_admin']
+=======
+                  'first_name', 'last_name', 'phone_number', 'licence_number', 'role']
+>>>>>>> db16045750c7e973cf86a57ba0855262d140a44d
 
     def create(self, validated_data):
         validated_data['password'] = make_password(
@@ -63,10 +67,14 @@ class RegisterSerializer(serializers.Serializer):
     username = serializers.CharField(max_length=60)
     phone_number = serializers.CharField(validators=[phone_regex], max_length=15)
     licence_number = serializers.CharField(validators=[license_regex], max_length=8)
-
+    
     is_admin = serializers.BooleanField(default=False)
     is_superuser = serializers.BooleanField(default=False)
     is_active = serializers.BooleanField(default=True)
+<<<<<<< HEAD
+=======
+    role = serializers.CharField(max_length=30)
+>>>>>>> db16045750c7e973cf86a57ba0855262d140a44d
 
     def get_cleaned_data(self):
         return {

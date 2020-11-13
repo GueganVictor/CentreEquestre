@@ -18,11 +18,11 @@ from django.urls import include, path
 from rest_framework import routers
 from equideo import views
 from rest_framework_jwt.views import obtain_jwt_token, refresh_jwt_token
-
+from equideo.views import CustomObtainAuthToken
 router = routers.DefaultRouter()
 router.register(r'users', views.UserViewSet)
 router.register(r'lessons', views.LessonViewSet)
-router.register(r'horse', views.HorseViewSet)
+router.register(r'horses', views.HorseViewSet)
 router.register(r'horseriders', views.HorseRiderViewSet)
 
 # Wire up our API using automatic URL routing.

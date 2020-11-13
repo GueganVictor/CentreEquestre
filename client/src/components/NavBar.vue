@@ -1,7 +1,14 @@
 <template>
   <div id="nav">
     <router-link to="/">Home</router-link> |
+<<<<<<< HEAD
     <router-link to="/posts">Dashboard</router-link> |
+=======
+    <router-link to="/admins">Admins</router-link> |
+    <router-link to="/horses">Horses</router-link> |
+    <router-link to="/lessons">Lessons</router-link> | 
+    <router-link to="/about">About</router-link> |
+>>>>>>> db16045750c7e973cf86a57ba0855262d140a44d
     <span v-if="isLoggedIn">
       <a @click="logout">Logout</a>
     </span>

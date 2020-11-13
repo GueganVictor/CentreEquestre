@@ -1,10 +1,4 @@
 <template>
-<<<<<<< HEAD
-  <div class="about">
-    <h1>This is an about page</h1>
-  </div>
-</template>
-=======
   <div class="users">
     <div v-if="User">
       <p>Hi {{ User.username }}</p>
@@ -27,25 +21,33 @@
           <label for="phone_number">Phone Number:</label>
           <input type="text" name="phone_number" v-model="form.phone_number" />
         </div>
-        <!-- <div>
+        <div>
           <label for="password">Password:</label>
           <input type="password" name="password" v-model="form.password" />
-        </div> -->
-        <!-- <div>
+        </div>
+                <div>
           <label for="role">role</label>
-          <select v-model="form.role" name="role" id="role">
-            <option
-              v-for="option in options"
-              :key="option.value"
-              v-bind:value="option.value"
-            >
-              {{ option.text }}
-            </option>
+          <select name="role" id="role">
+            <option value="admin">admin</option>
+            <option value="instructor">instructor</option>
+            <option value="superuser">superuser</option>
+            <option value="rider">rider</option>
           </select>
-        </div> -->
+        </div>
         <button type="submit">Submit</button>
       </form>
     </div>
+    <div class="users" v-if="Users">
+      <ul>
+        <li v-for="user in Users" :key="user.email">
+          <div id="user-div">
+            <p>{{ user.first_name }}</p>
+            <p>{{ user.email }}</p>
+          </div>
+        </li>
+      </ul>
+    </div>
+    <div v-else>Oh no!!! We have no users</div>
   </div>
 </template>
 
@@ -60,20 +62,13 @@ export default {
   data() {
     return {
       form: {
-        id: this.$store.getters.StateUser.id,
-        email: this.$store.getters.StateUser.email,
-        password: null,
-        first_name: this.$store.getters.StateUser.first_name,
-        last_name: this.$store.getters.StateUser.last_name,
-        phone_number: this.$store.getters.StateUser.phone_number,
-        role: this.$store.getters.StateUser.role,
+        email: "",
+        password: "",
+        first_name: "",
+        last_name: "",
+        phone_number: "",
+        role: "",
       },
-      // options: [
-      //   { text: 'superuser', value: 'superuser' },
-      //   { text: 'admin', value: 'admin' },
-      //   { text: 'instructor', value: 'instructor' },
-      //   { text: 'rider', value: 'rider' }
-      // ]
     };
   },
   created: function () {
@@ -84,21 +79,18 @@ export default {
     ...mapGetters({ Users: "StateUsers", User: "StateUser" }),
   },
   methods: {
-    ...mapActions(["UpdateUser", "GetUsers"]),
+    ...mapActions(["CreateAdmin", "GetUsers"]),
     async submit() {
-      const User = new FormData();
-      User.append("email", this.form.email);
-      // if (this.form.password) {
-      //   User.append("password", this.form.password);
-      // }
-      User.append("first_name", this.form.first_name);
-      User.append("id", this.form.id);
-      User.append("last_name", this.form.last_name);
-      User.append("phone_number", this.form.phone_number);
+      const Admin = new FormData();
+      Admin.append("email", this.form.email);
+      Admin.append("password", this.form.password);
+      Admin.append("first_name", this.form.first_name);
+      Admin.append("last_name", this.form.last_name);
+      Admin.append("phone_number", this.form.phone_number);
+      Admin.append("role", this.form.role);
       try {
-        await this.UpdateUser(User);
+        await this.CreateAdmin(Admin);
       } catch (error) {
-        console.log(error);
         throw "Sorry you can't make a user now!";
       }
     },
@@ -129,10 +121,8 @@ button[type="submit"] {
 button[type="submit"]:hover {
   background-color: #45a049;
 }
-input,
-select {
+input {
   width: auto;
-  min-width: 200px;
   margin: 15px;
   border: 0;
   box-shadow: 0 0 15px 4px rgba(0, 0, 0, 0.06);
@@ -159,4 +149,3 @@ ul {
   margin-bottom: 5px;
 }
 </style>
->>>>>>> db16045750c7e973cf86a57ba0855262d140a44d
