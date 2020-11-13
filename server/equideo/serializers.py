@@ -21,7 +21,11 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = User
         fields = ['url', 'username', 'email', 'password',
+<<<<<<< HEAD
+                  'first_name', 'last_name', 'phone_number', 'licence_number', 'is_superuser', 'is_admin']
+=======
                   'first_name', 'last_name', 'phone_number', 'licence_number', 'role']
+>>>>>>> db16045750c7e973cf86a57ba0855262d140a44d
 
     def create(self, validated_data):
         validated_data['password'] = make_password(
@@ -67,7 +71,10 @@ class RegisterSerializer(serializers.Serializer):
     is_admin = serializers.BooleanField(default=False)
     is_superuser = serializers.BooleanField(default=False)
     is_active = serializers.BooleanField(default=True)
+<<<<<<< HEAD
+=======
     role = serializers.CharField(max_length=30)
+>>>>>>> db16045750c7e973cf86a57ba0855262d140a44d
 
     def get_cleaned_data(self):
         return {

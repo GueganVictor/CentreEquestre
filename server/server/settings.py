@@ -84,7 +84,11 @@ REST_FRAMEWORK = {
 
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
+<<<<<<< HEAD
+        'equideo.backends.CsrfExemptSessionAuthentication'
+=======
         'equideo.backends.CsrfExemptSessionAuthentication',
+>>>>>>> db16045750c7e973cf86a57ba0855262d140a44d
     ),
     'NON_FIELD_ERRORS_KEY': 'global',
     #'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',

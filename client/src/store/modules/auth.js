@@ -2,6 +2,15 @@ import axios from "axios";
 
 const state = {
   user: null,
+<<<<<<< HEAD
+  posts: null,
+};
+
+const getters = {
+  isAuthenticated: (state) => !!state.user,
+  StatePosts: (state) => state.posts,
+  StateUser: (state) => state.user,
+=======
   users: null,
   horses: null,
   lessons: null,
@@ -16,6 +25,7 @@ const getters = {
   StateHorses: (state) => state.horses,
   StateLessons: (state) => state.lessons,
   StateToken: (state) => state.token,
+>>>>>>> db16045750c7e973cf86a57ba0855262d140a44d
 };
 
 const actions = {
@@ -32,6 +42,21 @@ const actions = {
     await dispatch('LogIn', UserForm)
   },
 
+<<<<<<< HEAD
+  async LogIn({commit}, user) {
+    await axios.post("auth/get_token/", user);
+    await commit("setUser", user);
+  },
+
+  async CreatePost({ dispatch }, post) {
+    await axios.post("post", post);
+    return await dispatch("GetPosts");
+  },
+
+  async GetPosts({ commit }) {
+    let response = await axios.get("users");
+    commit("setPosts", response.data);
+=======
   async LogIn({dispatch}, user) {
     let response = await axios.post("auth/get_token/", user);
     
@@ -106,18 +131,34 @@ const actions = {
        'Authorization': 'JWT '+ getters.StateToken.token,
       }});
     commit("setUser", response.data);
+>>>>>>> db16045750c7e973cf86a57ba0855262d140a44d
   },
 
   async LogOut({ commit }) {
     let user = null;
+<<<<<<< HEAD
+    let posts = null;
+    commit("logout", user, posts);
+=======
     let users = null;
     commit("logout", user, users);
+>>>>>>> db16045750c7e973cf86a57ba0855262d140a44d
   },
 };
 
 const mutations = {
   setUser(state, user) {
     let userdic = {
+<<<<<<< HEAD
+      "username":user.get("username"),
+      "email":user.get("email"),
+      "first_name":user.get("first_name"),
+      "last_name":user.get("last_name"),
+      "phone_number":user.get("phone_number"),
+      "licence_number":user.get("licence_number"),
+      "is_admin":user.get("password"),
+      "is_superuser":user.get("is_superuser"),
+=======
       "id":user.id,
       "username":user.username,
       "email":user.email,
@@ -126,10 +167,19 @@ const mutations = {
       "phone_number":user.phone_number,
       "licence_number":user.licence_number,
       "role":user.role,
+>>>>>>> db16045750c7e973cf86a57ba0855262d140a44d
     }
     state.user = userdic
   },
 
+<<<<<<< HEAD
+  setPosts(state, posts){
+    state.posts = posts
+},
+  logout(state, user, posts) {
+    state.user = user;
+    state.posts = posts;
+=======
   setUsers(state, users){
     state.users = users
 },
@@ -146,6 +196,7 @@ setLessons(state, lessons){
   logout(state, user, users) {
     state.user = user;
     state.users = users;
+>>>>>>> db16045750c7e973cf86a57ba0855262d140a44d
   },
 };
 
