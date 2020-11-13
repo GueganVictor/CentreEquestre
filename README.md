@@ -27,4 +27,5 @@ Ensuite, il faudra se placer dans le package 'client' et lancer la commande suiv
 Afin de pouvoir vous connecter en superuser, vous pouvez utiliser le compte suivant :
 
 username : admin
+
 password : admin
