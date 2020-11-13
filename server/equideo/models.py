@@ -19,13 +19,12 @@ class User(AbstractBaseUser):
     last_name = models.CharField(verbose_name='last name', max_length=30)
     username = models.CharField(
         verbose_name='username', max_length=60, blank=True, null=True, unique=True)
-    date_joined = models.DateTimeField(
-        verbose_name='date joined', auto_now_add=True)
     phone_number = models.CharField(
         validators=[phone_regex], unique=True, max_length=15)
     licence_number = models.CharField(
         validators=[license_regex], null=True, blank=True, max_length=8)
-
+    role = models.CharField(verbose_name='role', max_length=30)
+    
     is_admin = models.BooleanField(default=False)
     is_superuser = models.BooleanField(default=False)
     is_active = models.BooleanField(verbose_name='active', default=True)
