@@ -51,25 +51,11 @@ class UserAdapter(DefaultAccountAdapter):
         
         return super().save_user(request, user, form, commit=commit)
 
-<<<<<<< HEAD
 from rest_framework.authentication import SessionAuthentication 
-=======
-<<<<<<< HEAD
-from rest_framework.authentication import SessionAuthentication, BasicAuthentication 
-=======
-from rest_framework.authentication import SessionAuthentication 
->>>>>>> db16045750c7e973cf86a57ba0855262d140a44d
->>>>>>> 8b46794c4032994673c75c88f2f9256e8836f3e7
 
 class CsrfExemptSessionAuthentication(SessionAuthentication):
 
     def enforce_csrf(self, request):
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-        return  # To not perform the csrf check previously happening
-=======
->>>>>>> 8b46794c4032994673c75c88f2f9256e8836f3e7
         return  # To not perform the csrf check previously happening
 
          
@@ -101,9 +87,4 @@ def generate_refresh_token(user, token_version):
     refresh_token = jwt.encode(
         refresh_token_payload, settings.REFRESH_TOKEN_SECRET, algorithm='HS256').decode('utf-8')
 
-<<<<<<< HEAD
     return refresh_token
-=======
-    return refresh_token
->>>>>>> db16045750c7e973cf86a57ba0855262d140a44d
->>>>>>> 8b46794c4032994673c75c88f2f9256e8836f3e7

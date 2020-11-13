@@ -3,73 +3,17 @@
     <div v-if="User">
       <p>Hi {{ User.username }}</p>
     </div>
-<<<<<<< HEAD
     <div class="users" v-if="Lessons">
       <ul>
         <li v-for="lesson in Lessons" :key="lesson.title">
           <div id="user-div">
             <p>{{ lesson.title }}</p>
             <p>{{ lesson.end_time }}</p>
-=======
-    <div>
-      <form @submit.prevent="submit">
-        <div>
-          <label for="name">Name :</label>
-          <input type="name" name="name" v-model="form.name" />
-        </div>
-        <div>
-          <label for="hair">Hair:</label>
-          <input type="text" name="hair" v-model="form.hair" />
-        </div>
-        <div>
-          <label for="birth_date">Password:</label>
-          <input type="date" name="birth_date" v-model="form.birth_date" />
-        </div>
-        <div>
-          <input
-            type="number"
-            id="weight"
-            name="weight"
-            v-model="form.weight"
-          />
-          <label for="height">height</label>
-        </div>
-        <div>
-          <input
-            type="number"
-            id="height"
-            name="height"
-            v-model="form.height"
-          />
-          <label for="height">height</label>
-        </div>
-                <div>
-          <label for="is_healthy">Is healthy ?</label>
-          <input type="checkbox" checked name="is_healthy" v-model="form.is_healthy" />
-        </div>
-        <div>
-          <label for="is_here">Is Here ?</label>
-          <input type="checkbox" checked name="is_here" v-model="form.is_here" />
-        </div>
-        <button type="submit">Submit</button>
-      </form>
-    </div>
-    <div class="users" v-if="Horses">
-      <ul>
-        <li v-for="user in Horses" :key="user.name">
-          <div id="user-div">
-            <p>{{ user.name }}</p>
-            <p>{{ user.height }}</p>
->>>>>>> 8b46794c4032994673c75c88f2f9256e8836f3e7
           </div>
         </li>
       </ul>
     </div>
-<<<<<<< HEAD
     <div v-else>Oh no!!! We have no lessons</div>
-=======
-    <div v-else>Oh no!!! We have no horses</div>
->>>>>>> 8b46794c4032994673c75c88f2f9256e8836f3e7
   </div>
 </template>
 

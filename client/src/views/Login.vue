@@ -43,14 +43,7 @@ export default {
           this.$router.push("/");
           this.showError = false
       } catch (error) {
-<<<<<<< HEAD
         console.log(error)
-=======
-<<<<<<< HEAD
-=======
-        console.log(error)
->>>>>>> db16045750c7e973cf86a57ba0855262d140a44d
->>>>>>> 8b46794c4032994673c75c88f2f9256e8836f3e7
         this.showError = true
       }
     },

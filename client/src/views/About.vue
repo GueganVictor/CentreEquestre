@@ -1,13 +1,4 @@
 <template>
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-  <div class="about">
-    <h1>This is an about page</h1>
-  </div>
-</template>
-=======
->>>>>>> 8b46794c4032994673c75c88f2f9256e8836f3e7
   <div class="users">
     <div v-if="User">
       <p>Hi {{ User.username }}</p>
@@ -162,7 +153,3 @@ ul {
   margin-bottom: 5px;
 }
 </style>
-<<<<<<< HEAD
-=======
->>>>>>> db16045750c7e973cf86a57ba0855262d140a44d
->>>>>>> 8b46794c4032994673c75c88f2f9256e8836f3e7
