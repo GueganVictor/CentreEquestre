@@ -36,3 +36,24 @@ class NewBackend(BaseBackend):
             return my_user_model.objects.get(pk=user_id)
         except my_user_model.DoesNotExist:
             return None
+
+
+from allauth.account.adapter import DefaultAccountAdapter
+from allauth.account.utils import user_field
+
+class UserAdapter(DefaultAccountAdapter):
+    def save_user(self, request, user, form, commit=True):
+        data = form.cleaned_data
+        user_field(user, 'first_name',data.get('first_name'))
+        user_field(user, 'last_name',data.get('last_name'))
+        user_field(user, 'phone_number',data.get('phone_number'))
+        user_field(user, 'licence_number',data.get('licence_number'))
+        
+        return super().save_user(request, user, form, commit=commit)
+
+from rest_framework.authentication import SessionAuthentication, BasicAuthentication 
+
+class CsrfExemptSessionAuthentication(SessionAuthentication):
+
+    def enforce_csrf(self, request):
+        return  # To not perform the csrf check previously happening

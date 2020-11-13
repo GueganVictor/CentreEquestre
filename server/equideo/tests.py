@@ -34,7 +34,6 @@ class TestUser(unittest.TestCase):
                 "first_name": "Test",
                 "last_name": "User",
                 "username": "tu1984",
-                "date_joined":  datetime.now(),
                 "phone_number": "0699999990",
                 "licence_number": "6018474A",
                 "is_admin": True,

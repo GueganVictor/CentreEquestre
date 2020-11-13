@@ -66,6 +66,9 @@ REST_AUTH_REGISTER_SERIALIZERS = {
         'REGISTER_SERIALIZER': 'equideo.serializers.RegisterSerializer',
 }
 
+ACCOUNT_ADAPTER = 'equideo.backends.UserAdapter'
+
+
 # ALLAUTH
 
 SITE_ID = 1
@@ -83,8 +86,7 @@ REST_FRAMEWORK = {
     ),
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
-        'rest_framework.authentication.SessionAuthentication',
-        'rest_framework.authentication.BasicAuthentication',
+        'equideo.backends.CsrfExemptSessionAuthentication'
     ),
     'NON_FIELD_ERRORS_KEY': 'global',
     #'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
@@ -117,7 +119,6 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',

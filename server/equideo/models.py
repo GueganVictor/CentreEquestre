@@ -19,8 +19,6 @@ class User(AbstractBaseUser):
     last_name = models.CharField(verbose_name='last name', max_length=30)
     username = models.CharField(
         verbose_name='username', max_length=60, blank=True, null=True, unique=True)
-    date_joined = models.DateTimeField(
-        verbose_name='date joined', auto_now_add=True)
     phone_number = models.CharField(
         validators=[phone_regex], unique=True, max_length=15)
     licence_number = models.CharField(
