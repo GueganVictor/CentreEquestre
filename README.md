@@ -14,10 +14,17 @@ Ensuite, il faudra se placer dans le package ' server' lancer la commande suivan
 
 **python manage.py runserver**
 
-## Lancement du client
+# Lancement du client
 
 Afin de pouvoir lancer le client, il faudra au préalable posséder VueJs. Pour cela vous pouvez télécharger VueJs via le lien [suivant](https://vuejs.org/v2/guide/installation.html).
 
 Ensuite, il faudra se placer dans le package 'client' et lancer la commande suivante :
 
 **npm run serve**
+
+# Connexion
+
+Afin de pouvoir vous connecter en superuser, vous pouvez utiliser le compte suivant :
+
+username : admin
+password : admin
