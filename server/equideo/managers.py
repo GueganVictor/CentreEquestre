@@ -1,5 +1,5 @@
 from django.contrib.auth.models import BaseUserManager
-
+from django.contrib.auth.hashers import make_password
 class UserManager(BaseUserManager):
     
     def create_user(self, email, first_name, last_name, username,role,  phone_number, licence_number=None, password=None):
@@ -16,11 +16,13 @@ class UserManager(BaseUserManager):
             last_name = last_name,
             username = username,
             phone_number = phone_number,
-            licence_number = licence_number,
             role = role,
         )
    
-        user.set_password(password)
+
+        varhash = make_password(password, None, 'pbkdf2_sha256')
+        user.set_password(varhash)
+        
         user.save()
         return user
 
@@ -31,7 +33,6 @@ class UserManager(BaseUserManager):
         """
         user = self.create_user(
             username = username,
-            password=password,
             email = 'admin@admin.admin',
             first_name = "admin",
             last_name = "admin",
@@ -39,6 +40,8 @@ class UserManager(BaseUserManager):
             role = "superuser",
         )
 
+        varhash = make_password(password, None, 'pbkdf2_sha256')
+        user.set_password(varhash)
              
         user.is_admin = True
         user.is_superuser = True
