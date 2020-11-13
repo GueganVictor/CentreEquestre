@@ -8,7 +8,7 @@
       <router-link
         v-if="User.role == 'admin' || User.role == 'superuser'"
         to="/instructoradmin"
-        >InstructorAdmin
+        >Users
       </router-link> |
       <router-link v-if="User.role != 'rider'" to="/horses"
         >Horses
@@ -17,7 +17,7 @@
         >Lessons
       </router-link> |
       <router-link to="/about">About</router-link> |
-      <router-link to="/apply_lesson">Apply lesson</router-link> |
+      <router-link to="/apply_lesson">Consult lesson</router-link> |
     </div>
     <span v-if="isLoggedIn">
       <a @click="logout">Logout</a>

@@ -21,22 +21,6 @@
           <label for="phone_number">Phone Number:</label>
           <input type="text" name="phone_number" v-model="form.phone_number" />
         </div>
-        <!-- <div>
-          <label for="password">Password:</label>
-          <input type="password" name="password" v-model="form.password" />
-        </div> -->
-        <!-- <div>
-          <label for="role">role</label>
-          <select v-model="form.role" name="role" id="role">
-            <option
-              v-for="option in options"
-              :key="option.value"
-              v-bind:value="option.value"
-            >
-              {{ option.text }}
-            </option>
-          </select>
-        </div> -->
         <button type="submit">Submit</button>
       </form>
     </div>

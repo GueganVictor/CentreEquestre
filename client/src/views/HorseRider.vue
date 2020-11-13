@@ -32,11 +32,6 @@ export default {
       form: {
         name: "",
         birth_date: "",
-        is_healthy: "",
-        is_here: "",
-        hair: "",
-        weight: "",
-        height: "",
       },
     };
   },
@@ -53,11 +48,6 @@ export default {
       const Horse = new FormData();
       Horse.append("name", this.form.name);
       Horse.append("birth_date", this.form.birth_date);
-      Horse.append("is_healthy", this.form.is_healthy);
-      Horse.append("is_here", this.form.is_here);
-      Horse.append("hair", this.form.hair);
-      Horse.append("weight", this.form.weight);
-      Horse.append("height", this.form.height);
       try {
         await this.CreateHorseRiders(Horse);
       } catch (error) {
