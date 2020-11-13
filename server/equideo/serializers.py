@@ -21,7 +21,7 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = User
         fields = ['id', 'username', 'email', 'password',
-                  'first_name', 'last_name', 'phone_number', 'licence_number', 'role']
+                  'first_name', 'last_name', 'phone_number', 'licence_number', 'role', 'is_admin', 'is_superuser']
 
     def create(self, validated_data):
         validated_data['password'] = make_password(

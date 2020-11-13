@@ -82,9 +82,6 @@ export default {
     async submit() {
       const User = new FormData();
       User.append("email", this.form.email);
-      // if (this.form.password) {
-      //   User.append("password", this.form.password);
-      // }
       User.append("first_name", this.form.first_name);
       User.append("id", this.form.id);
       User.append("last_name", this.form.last_name);
