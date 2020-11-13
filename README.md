@@ -1,4 +1,4 @@
-# Bienvenu dans Equideo
+# Bienvenue dans Equideo
 
 Bonjour, je vous souhaite la bienvenu sur l'application Equideo qui est une application web de gestion de centre équestre. Celle-ci a été développé en Vuejs pour le frontend et Python-Django pour le backend. 
 
