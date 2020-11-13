@@ -47,7 +47,8 @@ INSTALLED_APPS = [
     'rest_auth',
     'rest_auth.registration',
     'rest_framework.authtoken',
-    'allauth.socialaccount'
+    'allauth.socialaccount',
+    'corsheaders',
 ]
 
 # User Model for Auth
@@ -65,6 +66,9 @@ REST_AUTH_REGISTER_SERIALIZERS = {
         'REGISTER_SERIALIZER': 'equideo.serializers.RegisterSerializer',
 }
 
+ACCOUNT_ADAPTER = 'equideo.backends.UserAdapter'
+
+
 # ALLAUTH
 
 SITE_ID = 1
@@ -77,13 +81,10 @@ REST_USE_JWT = True
 # REST Framework settings
 
 REST_FRAMEWORK = {
-    'DEFAULT_PERMISSION_CLASSES': (
-        'rest_framework.permissions.IsAuthenticated',
-    ),
+
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
-        'rest_framework.authentication.SessionAuthentication',
-        'rest_framework.authentication.BasicAuthentication',
+        'equideo.backends.CsrfExemptSessionAuthentication',
     ),
     'NON_FIELD_ERRORS_KEY': 'global',
     #'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
@@ -112,14 +113,26 @@ AUTHENTICATION_BACKENDS = (
 # }
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+CORS_ALLOW_CREDENTIALS = True
+CORS_ORIGIN_WHITELIST = (
+    'http://localhost:8000', # Here was the problem indeed and it has to be http://localhost:3000, not http://localhost:3000/
+    'http://localhost:8001',
+    'http://localhost:8080', # Here was the problem indeed and it has to be http://localhost:3000, not http://localhost:3000/
+    'http://localhost:8081',
+    'http://127.0.0.0:8000', # Here was the problem indeed and it has to be http://localhost:3000, not http://localhost:3000/
+    'http://127.0.0.0:8001',
+    'http://127.0.0.0:8080', # Here was the problem indeed and it has to be http://localhost:3000, not http://localhost:3000/
+    'http://127.0.0.0:8081',
+)
 
 ROOT_URLCONF = 'server.urls'
 
