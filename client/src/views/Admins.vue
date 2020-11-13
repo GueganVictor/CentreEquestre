@@ -25,6 +25,7 @@
           <label for="password">Password:</label>
           <input type="password" name="password" v-model="form.password" />
         </div>
+<<<<<<< HEAD
         <div>
           <label for="role">Role:</label>
           <input type="text" name="role" disabled value="admin" />
@@ -37,12 +38,31 @@
       <ul>
         <li v-for="user in Users" :key="user.email">
           <div v-if="user.role == 'admin'" id="user-div">
+=======
+                <div>
+          <label for="role">role</label>
+          <select name="role" id="role">
+            <option value="admin">admin</option>
+            <option value="instructor">instructor</option>
+            <option value="superuser">superuser</option>
+            <option value="rider">rider</option>
+          </select>
+        </div>
+        <button type="submit">Submit</button>
+      </form>
+    </div>
+    <div class="users" v-if="Users">
+      <ul>
+        <li v-for="user in Users" :key="user.email">
+          <div id="user-div">
+>>>>>>> 8b46794c4032994673c75c88f2f9256e8836f3e7
             <p>{{ user.first_name }}</p>
             <p>{{ user.email }}</p>
           </div>
         </li>
       </ul>
     </div>
+<<<<<<< HEAD
     <div v-else>Oh no!!! We have no users</div> -->
     <v-card>
       <v-card-title>
@@ -67,6 +87,9 @@
         </template>
       </v-data-table>
     </v-card>
+=======
+    <div v-else>Oh no!!! We have no users</div>
+>>>>>>> 8b46794c4032994673c75c88f2f9256e8836f3e7
   </div>
 </template>
 
@@ -80,6 +103,7 @@ export default {
   components: {},
   data() {
     return {
+<<<<<<< HEAD
       search: "",
       headers: [
         { text: "id", value: "id", align: "start", filterable: false },
@@ -90,6 +114,8 @@ export default {
         { text: "role", value: "role" },
         { text: "Actions", value: "actions", sortable: false },
       ],
+=======
+>>>>>>> 8b46794c4032994673c75c88f2f9256e8836f3e7
       form: {
         email: "",
         password: "",
@@ -108,7 +134,11 @@ export default {
     ...mapGetters({ Users: "StateUsers", User: "StateUser" }),
   },
   methods: {
+<<<<<<< HEAD
     ...mapActions(["CreateAdmin", "GetUsers", "DeleteUser"]),
+=======
+    ...mapActions(["CreateAdmin", "GetUsers"]),
+>>>>>>> 8b46794c4032994673c75c88f2f9256e8836f3e7
     async submit() {
       const Admin = new FormData();
       Admin.append("email", this.form.email);
@@ -116,17 +146,24 @@ export default {
       Admin.append("first_name", this.form.first_name);
       Admin.append("last_name", this.form.last_name);
       Admin.append("phone_number", this.form.phone_number);
+<<<<<<< HEAD
       Admin.append("role", "admin");
+=======
+      Admin.append("role", this.form.role);
+>>>>>>> 8b46794c4032994673c75c88f2f9256e8836f3e7
       try {
         await this.CreateAdmin(Admin);
       } catch (error) {
         throw "Sorry you can't make a user now!";
       }
     },
+<<<<<<< HEAD
     deleteItem(item) {
       this.DeleteUser(item.id)
       return null;
     },
+=======
+>>>>>>> 8b46794c4032994673c75c88f2f9256e8836f3e7
   },
 };
 </script>

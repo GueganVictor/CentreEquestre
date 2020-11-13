@@ -18,22 +18,32 @@
           <input type="date" name="birth_date" v-model="form.birth_date" />
         </div>
         <div>
+<<<<<<< HEAD
           <label for="height">weight</label>
+=======
+>>>>>>> 8b46794c4032994673c75c88f2f9256e8836f3e7
           <input
             type="number"
             id="weight"
             name="weight"
             v-model="form.weight"
           />
+<<<<<<< HEAD
         </div>
         <div>
           <label for="height">height</label>
+=======
+          <label for="height">height</label>
+        </div>
+        <div>
+>>>>>>> 8b46794c4032994673c75c88f2f9256e8836f3e7
           <input
             type="number"
             id="height"
             name="height"
             v-model="form.height"
           />
+<<<<<<< HEAD
         </div>
 
         <button type="submit">Submit</button>
@@ -44,6 +54,25 @@
         <li v-for="user in Horses" :key="user.name">
           <div id="user-div">
             <p>{{ user.id }}</p>
+=======
+          <label for="height">height</label>
+        </div>
+                <div>
+          <label for="is_healthy">Is healthy ?</label>
+          <input type="checkbox" checked name="is_healthy" v-model="form.is_healthy" />
+        </div>
+        <div>
+          <label for="is_here">Is Here ?</label>
+          <input type="checkbox" checked name="is_here" v-model="form.is_here" />
+        </div>
+        <button type="submit">Submit</button>
+      </form>
+    </div>
+    <div class="users" v-if="Horses">
+      <ul>
+        <li v-for="user in Horses" :key="user.name">
+          <div id="user-div">
+>>>>>>> 8b46794c4032994673c75c88f2f9256e8836f3e7
             <p>{{ user.name }}</p>
             <p>{{ user.height }}</p>
           </div>
@@ -51,6 +80,7 @@
       </ul>
     </div>
     <div v-else>Oh no!!! We have no horses</div>
+<<<<<<< HEAD
   </div> -->
     <v-card>
       <v-card-title>
@@ -68,6 +98,8 @@
         :search="search"
       ></v-data-table>
     </v-card>
+=======
+>>>>>>> 8b46794c4032994673c75c88f2f9256e8836f3e7
   </div>
 </template>
 
@@ -81,6 +113,7 @@ export default {
   components: {},
   data() {
     return {
+<<<<<<< HEAD
       search: "",
       headers: [
         { text: "id", value: "id", align: "start", filterable: false },
@@ -93,6 +126,13 @@ export default {
       form: {
         name: "",
         birth_date: "",
+=======
+      form: {
+        name: "",
+        birth_date: "",
+        is_healthy: "",
+        is_here: "",
+>>>>>>> 8b46794c4032994673c75c88f2f9256e8836f3e7
         hair: "",
         weight: "",
         height: "",
@@ -112,8 +152,13 @@ export default {
       const Horse = new FormData();
       Horse.append("name", this.form.name);
       Horse.append("birth_date", this.form.birth_date);
+<<<<<<< HEAD
       Horse.append("is_healthy", true);
       Horse.append("is_here", true);
+=======
+      Horse.append("is_healthy", this.form.is_healthy);
+      Horse.append("is_here", this.form.is_here);
+>>>>>>> 8b46794c4032994673c75c88f2f9256e8836f3e7
       Horse.append("hair", this.form.hair);
       Horse.append("weight", this.form.weight);
       Horse.append("height", this.form.height);
@@ -128,8 +173,11 @@ export default {
 </script>
 
 <style scoped>
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> 8b46794c4032994673c75c88f2f9256e8836f3e7
 form {
   width: 600px;
   margin: 0 auto;

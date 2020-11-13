@@ -21,9 +21,12 @@ export default {
   text-align: center;
   color: #2c3e50;
 }
+<<<<<<< HEAD
 
 .v-card {
   width: 75vw;
   margin: 0 auto;
 }
+=======
+>>>>>>> 8b46794c4032994673c75c88f2f9256e8836f3e7
 </style>
