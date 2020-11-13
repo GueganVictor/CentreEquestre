@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/2.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/2.2/ref/settings/
 """
-
+from datetime import timedelta
 import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -28,6 +28,8 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 
+
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -37,17 +39,100 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
+    'equideo',
+    'django.contrib.sites',
+    'allauth',
+    'allauth.account',
+    'rest_auth',
+    'rest_auth.registration',
+    'rest_framework.authtoken',
+    'allauth.socialaccount',
+    'corsheaders',
 ]
 
+# User Model for Auth
+AUTH_USER_MODEL = 'equideo.User'
+
+AUTHENTICATION_BACKENDS = (
+    'equideo.backends.NewBackend', # our custom authentication backend   
+)
+
+REST_AUTH_SERIALIZERS = {
+    'USER_DETAILS_SERIALIZER': 'equideo.serializers.UserSerializer',
+}
+
+REST_AUTH_REGISTER_SERIALIZERS = {
+        'REGISTER_SERIALIZER': 'equideo.serializers.RegisterSerializer',
+}
+
+ACCOUNT_ADAPTER = 'equideo.backends.UserAdapter'
+
+
+# ALLAUTH
+
+SITE_ID = 1
+ACCOUNT_EMAIL_VERIFICATION = 'none'
+
+# JWT settings
+
+REST_USE_JWT = True
+
+# REST Framework settings
+
+REST_FRAMEWORK = {
+
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
+        'equideo.backends.CsrfExemptSessionAuthentication',
+    ),
+    'NON_FIELD_ERRORS_KEY': 'global',
+    #'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    #'PAGE_SIZE': 10
+}
+
+# JWT settings
+
+JWT_AUTH = {
+    'JWT_ALLOW_REFRESH': True,
+    'JWT_EXPIRATION_DELTA': timedelta(days=2),
+}
+
+# User Model for Auth
+AUTH_USER_MODEL = 'equideo.User'
+
+AUTHENTICATION_BACKENDS = (
+    'equideo.backends.NewBackend', # our custom authentication backend
+    
+    )
+
+
+# REST_FRAMEWORK = {
+#     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+#     'PAGE_SIZE': 10
+# }
+
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+CORS_ALLOW_CREDENTIALS = True
+CORS_ORIGIN_WHITELIST = (
+    'http://localhost:8000', # Here was the problem indeed and it has to be http://localhost:3000, not http://localhost:3000/
+    'http://localhost:8001',
+    'http://localhost:8080', # Here was the problem indeed and it has to be http://localhost:3000, not http://localhost:3000/
+    'http://localhost:8081',
+    'http://127.0.0.0:8000', # Here was the problem indeed and it has to be http://localhost:3000, not http://localhost:3000/
+    'http://127.0.0.0:8001',
+    'http://127.0.0.0:8080', # Here was the problem indeed and it has to be http://localhost:3000, not http://localhost:3000/
+    'http://127.0.0.0:8081',
+)
 
 ROOT_URLCONF = 'server.urls'
 

@@ -14,8 +14,25 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import include, path
+from rest_framework import routers
+from equideo import views
+from rest_framework_jwt.views import obtain_jwt_token, refresh_jwt_token
+from equideo.views import CustomObtainAuthToken
+router = routers.DefaultRouter()
+router.register(r'users', views.UserViewSet)
+router.register(r'lessons', views.LessonViewSet)
+router.register(r'horses', views.HorseViewSet)
+router.register(r'horseriders', views.HorseRiderViewSet)
 
+# Wire up our API using automatic URL routing.
+# Additionally, we include login URLs for the browsable API.
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', include(router.urls)),
+    path('auth/', include('rest_auth.urls')),
+    path('auth/signup/', include('rest_auth.registration.urls')),
+    path('auth/refresh_token/', refresh_jwt_token),
+    path('auth/get_token/', obtain_jwt_token),
+    path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 ]
