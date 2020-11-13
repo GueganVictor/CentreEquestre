@@ -18,38 +18,32 @@
           <input type="date" name="birth_date" v-model="form.birth_date" />
         </div>
         <div>
+          <label for="height">weight</label>
           <input
             type="number"
             id="weight"
             name="weight"
             v-model="form.weight"
           />
-          <label for="height">height</label>
         </div>
         <div>
+          <label for="height">height</label>
           <input
             type="number"
             id="height"
             name="height"
             v-model="form.height"
           />
-          <label for="height">height</label>
         </div>
-                <div>
-          <label for="is_healthy">Is healthy ?</label>
-          <input type="checkbox" checked name="is_healthy" v-model="form.is_healthy" />
-        </div>
-        <div>
-          <label for="is_here">Is Here ?</label>
-          <input type="checkbox" checked name="is_here" v-model="form.is_here" />
-        </div>
+
         <button type="submit">Submit</button>
       </form>
     </div>
-    <div class="users" v-if="Horses">
+    <!-- <div class="users" v-if="Horses">
       <ul>
         <li v-for="user in Horses" :key="user.name">
           <div id="user-div">
+            <p>{{ user.id }}</p>
             <p>{{ user.name }}</p>
             <p>{{ user.height }}</p>
           </div>
@@ -57,6 +51,23 @@
       </ul>
     </div>
     <div v-else>Oh no!!! We have no horses</div>
+  </div> -->
+    <v-card>
+      <v-card-title>
+        <v-text-field
+          v-model="search"
+          append-icon="mdi-magnify"
+          label="Search"
+          single-line
+          hide-details
+        ></v-text-field>
+      </v-card-title>
+      <v-data-table
+        :headers="headers"
+        :items="Horses"
+        :search="search"
+      ></v-data-table>
+    </v-card>
   </div>
 </template>
 
@@ -70,11 +81,18 @@ export default {
   components: {},
   data() {
     return {
+      search: "",
+      headers: [
+        { text: "id", value: "id", align: "start", filterable: false },
+        { text: "name", value: "name" },
+        { text: "hair", value: "hair" },
+        { text: "birth_date", value: "birth_date" },
+        { text: "Height (cm)", value: "height" },
+        { text: "Weight (kg)", value: "weight" },
+      ],
       form: {
         name: "",
         birth_date: "",
-        is_healthy: "",
-        is_here: "",
         hair: "",
         weight: "",
         height: "",
@@ -94,8 +112,8 @@ export default {
       const Horse = new FormData();
       Horse.append("name", this.form.name);
       Horse.append("birth_date", this.form.birth_date);
-      Horse.append("is_healthy", this.form.is_healthy);
-      Horse.append("is_here", this.form.is_here);
+      Horse.append("is_healthy", true);
+      Horse.append("is_here", true);
       Horse.append("hair", this.form.hair);
       Horse.append("weight", this.form.weight);
       Horse.append("height", this.form.height);
@@ -110,6 +128,8 @@ export default {
 </script>
 
 <style scoped>
+
+
 form {
   width: 600px;
   margin: 0 auto;

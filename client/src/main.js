@@ -5,37 +5,6 @@ import vuetify from './plugins/vuetify';
 import store from './store';
 import axios from 'axios';
 
-<<<<<<< HEAD
-
-axios.defaults.withCredentials = true
-axios.defaults.baseURL = 'http://localhost:8000/';
-axios.defaults.headers.common['X-CSRFToken'] = App.csrfToken;
-
-
-axios.interceptors.response.use(undefined, function (error) {
-  if (error) {
-    const originalRequest = error.config;
-    if (error.response.status === 401 && !originalRequest._retry) {
-  
-        originalRequest._retry = true;
-        store.dispatch('LogOut')
-        return router.push('/login')
-    }
-  }
-})
-
-Vue.config.productionTip = false
-new Vue({
-  store,
-  router,
-  vuetify,
-  render: h => h(App)
-}).$mount('#app')
-
-
-
-
-=======
 axios.defaults.withCredentials = true
 axios.defaults.baseURL = 'http://localhost:8000/';
 
@@ -52,6 +21,8 @@ axios.interceptors.response.use(undefined, function (error) {
   }
 })
 
+
+
 Vue.config.productionTip = false
 new Vue({
   store,
@@ -63,7 +34,6 @@ new Vue({
 
 
 
->>>>>>> db16045750c7e973cf86a57ba0855262d140a44d
 // const store = new Vuex.Store({
 //   state: {
 //     jwt: localStorage.getItem('t'),

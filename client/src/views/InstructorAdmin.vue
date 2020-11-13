@@ -26,8 +26,11 @@
           <input type="password" name="password" v-model="form.password" />
         </div>
         <div>
-          <label for="role">Role:</label>
-          <input type="text" name="role" disabled value="admin" />
+          <label for="role">role</label>
+          <select v-model="form.role" name="role" id="role">
+            <option default value="admin">admin</option>
+            <option value="instructor">instructor</option>
+          </select>
         </div>
 
         <button type="submit">Submit</button>
@@ -36,9 +39,10 @@
     <!-- <div class="users" v-if="Users">
       <ul>
         <li v-for="user in Users" :key="user.email">
-          <div v-if="user.role == 'admin'" id="user-div">
+          <div v-if="user.role == 'admin' || user.role == 'instructor'" id="user-div">
             <p>{{ user.first_name }}</p>
             <p>{{ user.email }}</p>
+            <p>{{ user.role }}</p>
           </div>
         </li>
       </ul>
@@ -56,16 +60,9 @@
       </v-card-title>
       <v-data-table
         :headers="headers"
-        :items="Users.filter((user) => user.role == 'admin')"
+        :items="Users.filter(user => user.role == 'admin' || user.role == 'instructor')"
         :search="search"
-      >
-        <template v-slot:item.actions="{ item }">
-          <!-- <v-icon small class="mr-2" @click="editItem(item)">
-            mdi-pencil
-          </v-icon> -->
-          <v-icon small @click="deleteItem(item)"> mdi-delete </v-icon>
-        </template>
-      </v-data-table>
+      ></v-data-table>
     </v-card>
   </div>
 </template>
@@ -88,7 +85,6 @@ export default {
         { text: "last_name", value: "last_name" },
         { text: "phone_number", value: "phone_number" },
         { text: "role", value: "role" },
-        { text: "Actions", value: "actions", sortable: false },
       ],
       form: {
         email: "",
@@ -96,7 +92,7 @@ export default {
         first_name: "",
         last_name: "",
         phone_number: "",
-        role: "",
+        role: "admin",
       },
     };
   },
@@ -108,7 +104,7 @@ export default {
     ...mapGetters({ Users: "StateUsers", User: "StateUser" }),
   },
   methods: {
-    ...mapActions(["CreateAdmin", "GetUsers", "DeleteUser"]),
+    ...mapActions(["CreateAdmin", "GetUsers"]),
     async submit() {
       const Admin = new FormData();
       Admin.append("email", this.form.email);
@@ -116,16 +112,12 @@ export default {
       Admin.append("first_name", this.form.first_name);
       Admin.append("last_name", this.form.last_name);
       Admin.append("phone_number", this.form.phone_number);
-      Admin.append("role", "admin");
+      Admin.append("role", this.form.role);
       try {
         await this.CreateAdmin(Admin);
       } catch (error) {
         throw "Sorry you can't make a user now!";
       }
-    },
-    deleteItem(item) {
-      this.DeleteUser(item.id)
-      return null;
     },
   },
 };

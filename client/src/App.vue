@@ -21,4 +21,9 @@ export default {
   text-align: center;
   color: #2c3e50;
 }
+
+.v-card {
+  width: 75vw;
+  margin: 0 auto;
+}
 </style>

@@ -1,10 +1,4 @@
 <template>
-<<<<<<< HEAD
-  <div class="about">
-    <h1>This is an about page</h1>
-  </div>
-</template>
-=======
   <div class="users">
     <div v-if="User">
       <p>Hi {{ User.username }}</p>
@@ -159,4 +153,3 @@ ul {
   margin-bottom: 5px;
 }
 </style>
->>>>>>> db16045750c7e973cf86a57ba0855262d140a44d
